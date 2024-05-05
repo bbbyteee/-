@@ -1,0 +1,230 @@
+<!--该网页用于实现--主页--界面-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    <title>食品溯源系统 - 主页</title>
+
+    <!--  引入jq  -->
+    <script src="assets/js/jquery.js"></script>
+
+    <!-- begin::global styles -->
+    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
+    <!-- end::global styles -->
+
+    <!-- begin::custom styles -->
+    <link rel="stylesheet" href="assets/css/app.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/custom.css" type="text/css">
+    <!-- end::custom styles -->
+
+</head>
+<body class="horizontal-side-menu">
+
+<!-- begin::page loader-->
+<div class="page-loader">
+    <div class="spinner-border"></div>
+    <span>Loading ...</span>
+</div>
+<!-- end::page loader -->
+
+<!-- begin::side menu -->
+<div class="side-menu">
+    <div class='side-menu-body'>
+        <ul>
+            <li class="side-menu-divider">Navigation</li>
+            <li>
+                <a href="#"><i class="icon ti-home"></i> <span>个人中心</span> </a>
+                <ul>
+                    <li><a href="change_password.html">修改密码</a></li>
+                    <li><a href="personal_Info.html">个人信息</a></li>
+                </ul>
+            </li>
+            <li id="user"><a href="#"><i class="icon ti-layers-alt"></i> <span>用户管理</span> </a>
+                <ul>
+                    <li><a href="userList.html">用户信息修改 </a></li>
+                </ul>
+            </li>
+            <li id="manufacturer"><a href="#"><i class="icon ti-clipboard"></i> <span>生产厂商管理</span> </a>
+                <ul>
+                    <li><a href="manufacturerList.html">生产厂商</a>
+                        <ul>
+                            <li><a href="manufacturerList.html">查询 </a></li>
+                            <li><a href="InsertManufacturer.html">新增 </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li id="transport"><a href="#"><i class="icon ti-files"></i> <span>物流信息管理</span> </a>
+                <ul>
+                    <li><a href="transportList.html">运输商</a>
+                        <ul>
+                            <li><a href="transportList.html">查询 </a></li>
+                            <li><a href="InsertTransport.html">新增 </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li id="seller"><a href="#"><i class="icon ti-menu"></i> <span>销售商管理</span></a>
+                <ul>
+                    <li><a href="sellerList.html">销售商</a>
+                        <ul>
+                            <li><a href="sellerList.html">查询 </a></li>
+                            <li><a href="InsertSeller.html">新增 </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="#"><i class="icon ti-user"></i> <span>消费者查询</span></a>
+                <ul>
+                    <li><a href="consumerList.html">消费者</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- end::side menu -->
+
+<!-- begin::navbar -->
+<nav class="navbar">
+    <div class="container-fluid">
+
+        <div class="header-logo">
+            <a href="index.html">
+                <img src="assets/media/image/light-logo.png" alt="...">
+                <span class="logo-text d-none d-lg-block">食品溯源系统</span>
+            </a>
+        </div>
+
+        <div class="header-body">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown d-none d-lg-block">
+                    <a href="#" class="nav-link" data-toggle="dropdown">
+                        <i class="fa fa-th-large"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-big dropdown-menu-nav-grid">
+                        <div class="dropdown-menu-title">Quick menu</div>
+                        <div class="dropdown-menu-body">
+                            <div class="nav-grid">
+                                <div class="nav-grid-row">
+                                    <a href="personal_Info.html" class="nav-grid-item">
+                                        <i class="fa fa-address-book-o"></i>
+                                        <span>个人信息</span>
+                                    </a>
+                                    <a href="consumerList.html" class="nav-grid-item">
+                                        <i class="fa fa-dashboard"></i>
+                                        <span>消费者查询</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <form class="search">
+                <div class="col-md-10">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search ..."
+                               aria-label="Recipient's username"
+                               aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn" type="button" id="button-addon2">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a href="#" data-toggle="dropdown">
+                        <figure class="avatar avatar-sm avatar-state-success">
+                            <img class="rounded-circle" src="assets/media/image/avatar.jpg" alt="...">
+                        </figure>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="personal_Info.html" class="dropdown-item">个人信息</a>
+                        <a href="change_password.html" class="dropdown-item">修改密码</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="login.html" class="text-danger dropdown-item">注销</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+<!-- end::navbar -->
+
+<!-- begin::main content -->
+<main class="main-content">
+
+    <div class="container-fluid">
+
+        <!-- begin::page header -->
+        <div class="page-header d-md-flex justify-content-between align-items-center">
+            <h4>首页</h4>
+        </div>
+        <!-- end::page header -->
+
+        <!--欢迎界面-->
+        <p class="text-center">
+            <h1>欢迎来到--食品溯源系统--！</h1>
+        </p>
+
+    </div>
+
+</main>
+<!-- end::main content -->
+
+<!--定义js操作函数-->
+<script>
+    //展示用户信息界面的操作函数
+    $(function (){
+        var str = sessionStorage.obj;
+        if(str==null){
+            alert("请先完成登录！");
+            window.location.href="login.html";
+        }
+    });
+
+    //根据身份隐藏部分功能界面
+    $(function () {
+        var str = sessionStorage.obj;
+        var obj = $.parseJSON(str);
+        if(obj.user.u_position == '1'){
+            $('#user').hide();
+            $('#transport').hide();
+            $('#seller').hide();
+        }else if(obj.user.u_position == '2'){
+            $('#user').hide();
+            $('#manufacturer').hide();
+            $('#seller').hide();
+        }else if(obj.user.u_position == '3'){
+            $('#user').hide();
+            $('#manufacturer').hide();
+            $('#transport').hide();
+        }else if(obj.user.u_position == '4'){
+            $('#user').hide();
+            $('#manufacturer').hide();
+            $('#transport').hide();
+            $('#seller').hide();
+        }
+    });
+
+</script>
+
+<!-- begin::global scripts -->
+<script src="assets/vendors/bundle.js"></script>
+<!-- end::global scripts -->
+
+<!-- begin::custom scripts -->
+<script src="assets/js/custom.js"></script>
+<script src="assets/js/app.js"></script>
+<!-- end::custom scripts -->
+
+</body>
+</html>

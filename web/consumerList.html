@@ -1,0 +1,397 @@
+﻿<!--该网页用于实现--消费者查询--界面-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    <title>食品溯源系统 - 消费者查询</title>
+
+    <!--  引入jq  -->
+    <script src="assets/js/jquery.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/web3/1.8.2/web3.min.js"></script>
+    <script src="./trace.js"></script>
+    <!-- begin::global styles -->
+    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
+    <!-- end::global styles -->
+
+    <!-- begin::custom styles -->
+    <!--    <link rel="stylesheet" href="assets/css/bootstrap.css" type="text/css">-->
+    <link rel="stylesheet" href="assets/css/app.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/custom.css" type="text/css">
+    <!-- end::custom styles -->
+
+</head>
+<body class="horizontal-side-menu">
+
+<!-- begin::page loader-->
+<div class="page-loader">
+    <div class="spinner-border"></div>
+    <span>Loading ...</span>
+</div>
+<!-- end::page loader -->
+
+<!-- begin::side menu -->
+<div class="side-menu">
+    <div class='side-menu-body'>
+        <ul>
+            <li class="side-menu-divider">Navigation</li>
+            <li>
+                <a href="#"><i class="icon ti-home"></i> <span>个人中心</span> </a>
+                <ul>
+                    <li><a href="change_password.html">修改密码</a></li>
+                    <li><a href="personal_Info.html">个人信息</a></li>
+                </ul>
+            </li>
+            <li id="user"><a href="#"><i class="icon ti-layers-alt"></i> <span>用户管理</span> </a>
+                <ul>
+                    <li><a href="userList.html">用户信息修改 </a></li>
+                </ul>
+            </li>
+            <li id="manufacturer"><a href="#"><i class="icon ti-clipboard"></i> <span>生产厂商管理</span> </a>
+                <ul>
+                    <li><a href="manufacturerList.html">生产厂商</a>
+                        <ul>
+                            <li><a href="manufacturerList.html">查询 </a></li>
+                            <li><a href="InsertManufacturer.html">新增 </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li id="transport"><a href="#"><i class="icon ti-files"></i> <span>物流信息管理</span> </a>
+                <ul>
+                    <li><a href="transportList.html">运输商</a>
+                        <ul>
+                            <li><a href="transportList.html">查询 </a></li>
+                            <li><a href="InsertTransport.html">新增 </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li id="seller"><a href="#"><i class="icon ti-menu"></i> <span>销售商管理</span></a>
+                <ul>
+                    <li><a href="sellerList.html">销售商</a>
+                        <ul>
+                            <li><a href="sellerList.html">查询 </a></li>
+                            <li><a href="InsertSeller.html">新增 </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li class="open"><a href="#"><i class="icon ti-user"></i> <span>消费者查询</span></a>
+                <ul>
+                    <li><a class="active" href="consumerList.html">消费者</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- end::side menu -->
+
+<!-- begin::navbar -->
+<nav class="navbar">
+    <div class="container-fluid">
+
+        <div class="header-logo">
+            <a href="index.html">
+                <img src="assets/media/image/light-logo.png" alt="...">
+                <span class="logo-text d-none d-lg-block">食品溯源系统</span>
+            </a>
+        </div>
+
+        <div class="header-body">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown d-none d-lg-block">
+                    <a href="#" class="nav-link" data-toggle="dropdown">
+                        <i class="fa fa-th-large"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-big dropdown-menu-nav-grid">
+                        <div class="dropdown-menu-title">Quick menu</div>
+                        <div class="dropdown-menu-body">
+                            <div class="nav-grid">
+                                <div class="nav-grid-row">
+                                    <a href="personal_Info.html" class="nav-grid-item">
+                                        <i class="fa fa-address-book-o"></i>
+                                        <span>个人信息</span>
+                                    </a>
+                                    <a href="consumerList.html" class="nav-grid-item">
+                                        <i class="fa fa-dashboard"></i>
+                                        <span>消费者查询</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <form class="search">
+                <div class="col-md-10">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search ..."
+                               aria-label="Recipient's username"
+                               aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn" type="button" id="button-addon2">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a href="#" data-toggle="dropdown">
+                        <figure class="avatar avatar-sm avatar-state-success">
+                            <img class="rounded-circle" src="assets/media/image/avatar.jpg" alt="...">
+                        </figure>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="personal_Info.html" class="dropdown-item">个人信息</a>
+                        <a href="change_password.html" class="dropdown-item">修改密码</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="login.html" class="text-danger dropdown-item">注销</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+<!-- end::navbar -->
+
+<!-- begin::main content -->
+<main class="main-content">
+
+    <div class="container-fluid">
+
+        <!-- begin::page header -->
+        <div class="page-header d-md-flex justify-content-between align-items-center">
+            <h4>消费者查询</h4>
+        </div>
+        <!-- end::page header -->
+
+        <!--查询和添加-->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">食品信息查询</h5>
+                <form id="QueryForm" class="needs-validation" novalidate>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="validationTooltip01">食品溯源码</label>
+                            <input type="text" name="m_id" class="form-control" id="validationTooltip01"
+                                   placeholder="m_id" value="" required>
+                        </div>
+                    </div>
+                    <td>
+                        <button id="QueryID" onclick="Query_M_ID()" class="btn btn-primary" type="button">查询</button>
+                    </td>
+
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">生产商</h6>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">食品id</th>
+                                    <th scope="col">食品名称</th>
+                                    <th scope="col">产地</th>
+                                    <th scope="col">生产日期</th>
+                                    <th scope="col">入库日期</th>
+                                    <th scope="col">打包日期</th>
+                                    <th scope="col">出库日期</th>
+                                </tr>
+                                </thead>
+                                <!--          在tbody中要插入数据节点【html】                      -->
+                                <tbody id="tbody_block">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">运输商</h6>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">食品id</th>
+                                    <th scope="col">单位名称</th>
+                                    <th scope="col">入库日期</th>
+                                    <th scope="col">出库日期</th>
+                                    <th scope="col">运输方式</th>
+                                    <th scope="col">主要流向</th>
+                                </tr>
+                                </thead>
+                                <!--          在tbody中要插入数据节点【html】                      -->
+                                <tbody id="tbody_block2">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body">
+                        <h6 class="card-title">销售商</h6>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">食品id</th>
+                                    <th scope="col">经销商</th>
+                                    <th scope="col">新冠检测</th>
+                                    <th scope="col">入库日期</th>
+                                    <th scope="col">出库日期</th>
+                                    <th scope="col">上架日期</th>
+                                </tr>
+                                </thead>
+                                <!--          在tbody中要插入数据节点【html】                      -->
+                                <tbody id="tbody_block3">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+<!-- end::main content -->
+
+<!--定义js操作函数-->
+<script>
+
+    //在页面模糊查询时会发起异步请求
+    function Query_M_ID(){
+        let data = $('#QueryForm').serializeArray();
+        Query_M(data);
+        Query_T(data);
+        Query_S(data);
+    }
+
+    //根据身份隐藏部分功能界面
+    $(function () {
+        var str = sessionStorage.obj;
+        var obj = $.parseJSON(str);
+        if(obj.user.u_position == '1'){
+            $('#user').hide();
+            $('#transport').hide();
+            $('#seller').hide();
+        }else if(obj.user.u_position == '2'){
+            $('#user').hide();
+            $('#manufacturer').hide();
+            $('#seller').hide();
+        }else if(obj.user.u_position == '3'){
+            $('#user').hide();
+            $('#manufacturer').hide();
+            $('#transport').hide();
+        }else if(obj.user.u_position == '4'){
+            $('#user').hide();
+            $('#manufacturer').hide();
+            $('#transport').hide();
+            $('#seller').hide();
+        }
+    });
+
+    //m_id查找生产商
+    function Query_M(data){
+        $.get('/WebDemo/Query_manufacturer', data, function (result) {
+            $("#tbody_block").empty();
+            let tr = $('<tr></tr>');
+            if(result.ok==false){
+                alert(result.message);
+            }else{
+                //tr中添加一行中的多个单元格td
+                tr.append($(' <th scope="row">' + result.m.m_id + '</th>'));
+                tr.append($(' <td>' + result.m.m_foodname + '</td>'));
+                tr.append($(' <td>' + result.m.m_origin_place + '</td>'));
+                tr.append($(' <td>' + result.m.m_date_manufacture + '</td>'));
+                tr.append($(' <td>' + result.m.m_in_date + '</td>'));
+                tr.append($(' <td>' + result.m.m_packaging_date + '</td>'));
+                tr.append($(' <td>' + result.m.m_out_date + '</td>'));
+                tr.append($('<td>\n' +
+                    ' <button onclick="checkHashByManufacturer(this)" data-toggle="modal" ' +
+                    'data-target=".bd-example-modal-lg"class="btn btn-default btn-success" type="button">进行Hash溯源校验</button>\n' +
+                    ' </td>'));
+                //把tr节点插入到tbody中
+                $("#tbody_block").append(tr);
+            }
+        });
+    }
+    //m_id查找运输商
+    function Query_T(data){
+        $.get('/WebDemo/Query_transport', data, function (result) {
+            $("#tbody_block2").empty();
+            let tr = $('<tr></tr>');
+            if (result.ok==true) {
+                //tr中添加一行中的多个单元格td
+                tr.append($(' <th scope="row">' + result.t.m_id + '</th>'));
+                tr.append($(' <td>' + result.t.t_name + '</td>'));
+                tr.append($(' <td>' + result.t.t_in_date + '</td>'));
+                tr.append($(' <td>' + result.t.t_out_date + '</td>'));
+                tr.append($(' <td>' + result.t.t_type_transportation + '</td>'));
+                tr.append($(' <td>' + result.t.t_destination + '</td>'));
+                tr.append($('<td>\n' +
+                    ' <button onclick="checkHashByTransport(this)" data-toggle="modal" ' +
+                    'data-target=".bd-example-modal-lg"class="btn btn-default btn-success" type="button">进行Hash溯源校验</button>\n' +
+                    ' </td>'));
+                //把tr节点插入到tbody中
+                $("#tbody_block2").append(tr);
+            }
+        });
+
+    }
+    //m_id查找销售商
+    function Query_S(data){
+        $.get('/WebDemo/Query_seller', data, function (result) {
+            $("#tbody_block3").empty();
+            let tr = $('<tr></tr>');
+            //tr中添加一行中的多个单元格td
+            if (result.ok==true) {
+                tr.append($(' <th scope="row">' + result.s.m_id + '</th>'));
+                tr.append($(' <td>' + result.s.s_seller + '</td>'));
+                tr.append($(' <td>' + result.s.s_COVID19_Report + '</td>'));
+                tr.append($(' <td>' + result.s.s_in_date + '</td>'));
+                tr.append($(' <td>' + result.s.s_out_date + '</td>'));
+                tr.append($(' <td>' + result.s.s_launch_date + '</td>'));
+                tr.append($('<td>\n' +
+                    ' <button onclick="checkHashBySeller(this)" data-toggle="modal" ' +
+                    'data-target=".bd-example-modal-lg"class="btn btn-default btn-success" type="button">进行Hash溯源校验</button>\n' +
+                    ' </td>'));
+                //把tr节点插入到tbody中
+                $("#tbody_block3").append(tr);
+            }
+        });
+    }
+
+    $(document).keydown(function(event){
+        if(event.keyCode==13){
+            document.getElementById("QueryID").click();
+            event.preventDefault();  // 禁止默认行为
+        }
+    });
+
+</script>
+
+
+<!-- begin::global scripts -->
+<script src="assets/vendors/bundle.js"></script>
+<!-- end::global scripts -->
+
+<!-- begin::custom scripts -->
+<script src="assets/js/custom.js"></script>
+<script src="assets/js/app.js"></script>
+<!-- end::custom scripts -->
+
+</body>
+</html>

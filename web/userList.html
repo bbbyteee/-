@@ -1,0 +1,546 @@
+﻿<!--该网页用于实现--用户列表--界面-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    <title>食品溯源系统 - 用户列表</title>
+
+    <!--  引入jq  -->
+    <script src="assets/js/jquery.js"></script>
+    <!-- begin::global styles -->
+    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
+    <!-- end::global styles -->
+
+    <!-- begin::custom styles -->
+    <!--    <link rel="stylesheet" href="assets/css/bootstrap.css" type="text/css">-->
+    <link rel="stylesheet" href="assets/css/app.css" type="text/css">
+    <link rel="stylesheet" href="assets/css/custom.css" type="text/css">
+    <!-- end::custom styles -->
+
+</head>
+<body class="horizontal-side-menu">
+
+<!-- begin::page loader-->
+<div class="page-loader">
+    <div class="spinner-border"></div>
+    <span>Loading ...</span>
+</div>
+<!-- end::page loader -->
+
+<!-- begin::side menu -->
+<div class="side-menu">
+    <div class='side-menu-body'>
+        <ul>
+            <li class="side-menu-divider">Navigation</li>
+            <li>
+                <a href="#"><i class="icon ti-home"></i> <span>个人中心</span> </a>
+                <ul>
+                    <li><a href="change_password.html">修改密码</a></li>
+                    <li><a href="personal_Info.html">个人信息</a></li>
+                </ul>
+            </li>
+            <li id="user" class="open"><a href="#"><i class="icon ti-layers-alt"></i> <span>用户管理</span> </a>
+                <ul>
+                    <li><a class="active" href="userList.html">用户信息修改 </a></li>
+                </ul>
+            </li>
+            <li id="manufacturer"><a href="#"><i class="icon ti-clipboard"></i> <span>生产厂商管理</span> </a>
+                <ul>
+                    <li><a href="manufacturerList.html">生产厂商</a>
+                        <ul>
+                            <li><a href="manufacturerList.html">查询 </a></li>
+                            <li><a href="InsertManufacturer.html">新增 </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li id="transport"><a href="#"><i class="icon ti-files"></i> <span>物流信息管理</span> </a>
+                <ul>
+                    <li><a href="transportList.html">运输商</a>
+                        <ul>
+                            <li><a href="transportList.html">查询 </a></li>
+                            <li><a href="InsertTransport.html">新增 </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li id="seller"><a href="#"><i class="icon ti-menu"></i> <span>销售商管理</span></a>
+                <ul>
+                    <li><a href="sellerList.html">销售商</a>
+                        <ul>
+                            <li><a href="sellerList.html">查询 </a></li>
+                            <li><a href="InsertSeller.html">新增 </a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="#"><i class="icon ti-user"></i> <span>消费者查询</span></a>
+                <ul>
+                    <li><a href="consumerList.html">消费者</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- end::side menu -->
+
+<!-- begin::navbar -->
+<nav class="navbar">
+    <div class="container-fluid">
+
+        <div class="header-logo">
+            <a href="index.html">
+                <img src="assets/media/image/light-logo.png" alt="...">
+                <span class="logo-text d-none d-lg-block">食品溯源系统</span>
+            </a>
+        </div>
+
+        <div class="header-body">
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown d-none d-lg-block">
+                    <a href="#" class="nav-link" data-toggle="dropdown">
+                        <i class="fa fa-th-large"></i>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-big dropdown-menu-nav-grid">
+                        <div class="dropdown-menu-title">Quick menu</div>
+                        <div class="dropdown-menu-body">
+                            <div class="nav-grid">
+                                <div class="nav-grid-row">
+                                    <a href="personal_Info.html" class="nav-grid-item">
+                                        <i class="fa fa-address-book-o"></i>
+                                        <span>个人信息</span>
+                                    </a>
+                                    <a href="consumerList.html" class="nav-grid-item">
+                                        <i class="fa fa-dashboard"></i>
+                                        <span>消费者查询</span>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <form class="search">
+                <div class="col-md-10">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search ..."
+                               aria-label="Recipient's username"
+                               aria-describedby="button-addon2">
+                        <div class="input-group-append">
+                            <button class="btn" type="button" id="button-addon2">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <ul class="navbar-nav">
+                <li class="nav-item dropdown">
+                    <a href="#" data-toggle="dropdown">
+                        <figure class="avatar avatar-sm avatar-state-success">
+                            <img class="rounded-circle" src="assets/media/image/avatar.jpg" alt="...">
+                        </figure>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a href="personal_Info.html" class="dropdown-item">个人信息</a>
+                        <a href="change_password.html" class="dropdown-item">修改密码</a>
+                        <div class="dropdown-divider"></div>
+                        <a href="login.html" class="text-danger dropdown-item">注销</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>
+<!-- end::navbar -->
+
+<!-- begin::main content -->
+<main class="main-content">
+
+    <div class="container-fluid">
+
+        <!-- begin::page header -->
+        <div class="page-header d-md-flex justify-content-between align-items-center">
+            <h4>用户管理</h4>
+        </div>
+        <!-- end::page header -->
+
+        <!--查询和添加-->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">员工信息查询</h5>
+                <form id="userQueryForm" class="needs-validation" novalidate>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="validationTooltip01">员工编号</label>
+                            <input type="text" name="u_id" class="form-control" id="validationTooltip01"
+                                   placeholder="user_id"
+                                   value="" required>
+                            <div class="valid-tooltip">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="validationTooltip02">员工昵称</label>
+                            <input type="text" name="u_nickname" class="form-control" id="validationTooltip02"
+                                   placeholder="user_nickname"
+                                   value="" required>
+                            <div class="valid-tooltip">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="validationTooltip02">员工姓名</label>
+                            <input type="text" name="u_name" class="form-control" id="validationTooltip03"
+                                   placeholder="user_name"
+                                   value="" required>
+                            <div class="valid-tooltip">
+                                Looks good!
+                            </div>
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="validationTooltip02">员工电话号码</label>
+                            <input type="text" name="u_phone" class="form-control" id="validationTooltip04"
+                                   placeholder="user_phone"
+                                   value="" required>
+                            <div class="valid-tooltip">
+                                Looks good!
+                            </div>
+                        </div>
+                    </div>
+                    <td>
+                        <button onclick="Fuzzy_queryUser(1)" class="btn btn-primary" type="button">查询</button>
+                    </td>
+
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    <th scope="col">编号</th>
+                                    <th scope="col">昵称</th>
+                                    <th scope="col">密码</th>
+                                    <th scope="col">姓名</th>
+                                    <th scope="col">性别</th>
+                                    <th scope="col">权限</th>
+                                    <th scope="col">电话号码</th>
+                                    <th scope="col">创建时间</th>
+                                </tr>
+                                </thead>
+                                <!--          在tbody中要插入数据节点【html】                      -->
+                                <tbody id="tbody_block">
+                                <!--编写登录的异步请求js代码-->
+                                <script>
+                                    //在页面加载时会发起异步请求
+                                    $(function () {
+                                        Fuzzy_queryUser(1);
+                                    });
+                                </script>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <nav aria-label="Page navigation">
+                            <ul class="pagination" id="pagination">
+                            </ul>
+                            <div class="row">
+                                <form id="GoPageForm" class="needs-validation" novalidate>
+                                    <div class="col-lg-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <button disabled="disabled" onclick="" class="btn btn-primary" type="button">跳转到第</button>
+                                            </span>
+                                            <input id="page" name="page" type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                            <span class="input-group-addon">
+                                                <button onclick="GoPage()" class="btn btn-primary" type="button">页</button>
+                                            </span>
+                                        </div>
+                                    </div><!-- /.col-lg-6 -->
+                                </form>
+                            </div><!-- /.row -->
+                        </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</main>
+<!-- end::main content -->
+
+<!--定义js操作函数-->
+<script>
+    //确认是否登录的操作函数
+    $(function (){
+        var str = sessionStorage.obj;
+        if(str==null){
+            alert("请先完成登录！");
+            window.location.href="login.html";
+        }else{
+            var obj = $.parseJSON(str);
+            if(obj.user.u_position != "0"){
+                alert("该用户身份非超级管理员，不可访问此页面！");
+                window.history.back();
+            }
+            $("#personal").hide();
+        }
+    });
+
+    //根据身份隐藏部分功能界面
+    $(function () {
+        var str = sessionStorage.obj;
+        var obj = $.parseJSON(str);
+        if(obj.user.u_position == '1'){
+            $('#user').hide();
+            $('#transport').hide();
+            $('#seller').hide();
+        }else if(obj.user.u_position == '2'){
+            $('#user').hide();
+            $('#manufacturer').hide();
+            $('#seller').hide();
+        }else if(obj.user.u_position == '3'){
+            $('#user').hide();
+            $('#manufacturer').hide();
+            $('#transport').hide();
+        }else if(obj.user.u_position == '4'){
+            $('#user').hide();
+            $('#manufacturer').hide();
+            $('#transport').hide();
+            $('#seller').hide();
+        }
+    });
+
+    //展示用户修改界面的操作函数
+    function showUpdate(btn) {
+        let tr = btn.parentNode.parentNode;//btn-->td-->tr
+        //获取到六个数据
+        let update_id = $(tr.childNodes[0]).text();
+        let update_nickname = $(tr.childNodes[1]).text();
+        let update_password = $(tr.childNodes[2]).text();
+        let update_name = $(tr.childNodes[3]).text();
+        let update_sex = $(tr.childNodes[4]).text();
+        let update_phone = $(tr.childNodes[6]).text();
+        //显示到input标签中
+        $('#update_u_id').val(update_id);
+        $('#update_u_nickname').val(update_nickname);
+        $('#update_u_password').val(update_password);
+        $('#update_u_name').val(update_name);
+        $('#update_u_sex').val(update_sex);
+        $('#update_u_phone').val(update_phone);
+    }
+
+    //修改的操作函数
+    function updateUser() {
+        //1、获取表单中的数据
+        let data = $('#updateFrom').serializeArray();
+        //2、提交登录post请求   第一个参数为url，第二个参数提交的数据，第三参数为成功之后的回调函数
+        $.post('/WebDemo/userUpdate', data, function (result) {
+            //修改成功
+            if (result.ok == true) {
+                alert("修改成功");
+                //跳转mangerList.html页面
+                location.href = "userList.html";
+            } else {
+                alert(result.message);
+            }
+        });
+    }
+
+    //删除的操作函数
+    function deleteUser(btn) {
+        //获取id数据
+        let tr = btn.parentNode.parentNode;//btn-->td-->tr
+        //获取到三个数据
+        let delete_id = $(tr.childNodes[0]).text();
+
+        //2、提交删除post请求   第一个参数为url，第二个参数提交的数据，第三参数为成功之后的回调函数
+        $.post('/WebDemo/userDelete', {userid: delete_id}, function (result) {
+            //删除成功
+            if (result.ok == true) {
+                alert("删除成功");
+                //跳转mangerList.html页面
+                location.href = "userList.html";
+            } else {
+                alert(result.message);
+            }
+        });
+    }
+
+    //在页面模糊查询时会发起异步请求
+    function Fuzzy_queryUser(num) {
+        let data = $('#userQueryForm').serializeArray();
+        $.get('/WebDemo/userFuzzyQuery', data, function (result) {
+            $("#tbody_block").empty();
+            //查询成功的结果
+            //一页五行
+            var count = result.user_list.length;
+            var pages = Math.ceil(count / 5);
+            // console.log(result);
+            //循环遍历插入节点到tbody
+            var sum = 0;
+            for (let i = (num - 1) * 5; i < count; i++) {
+                // console.log(result.user_list[i]);
+                //一行的tr
+                let tr = $('<tr></tr>');
+                //tr中添加一行中的多个单元格td
+                tr.append($(' <th scope="row">' + result.user_list[i].u_id + '</th>'));
+                tr.append($(' <td>' + result.user_list[i].u_nickname + '</td>'));
+                tr.append($(' <td>' + result.user_list[i].u_password + '</td>'));
+                tr.append($(' <td>' + result.user_list[i].u_name + '</td>'));
+                tr.append($(' <td>' + result.user_list[i].u_sex + '</td>'));
+                tr.append($(' <td>' + result.user_list[i].u_position_name + '</td>'));
+                tr.append($(' <td>' + result.user_list[i].u_phone + '</td>'));
+                tr.append($(' <td>' + result.user_list[i].u_time + '</td>'));
+                tr.append($('<td>\n' +
+                    ' <button onclick="showUpdate(this)" data-toggle="modal" data-target=".bd-example-modal-lg"class="btn btn-default btn-success" type="button">修改</button>\n' +
+                    ' <button onclick="deleteUser(this)" class="btn btn-default btn-danger" type="button">删除</button>\n' +
+                    ' </td>'));
+                //把tr节点插入到tbody中
+                $("#tbody_block").append(tr);
+                sum = sum + 1;
+                if (sum == 5) break;
+            }
+            $("#pagination").empty();
+            //设置分页格式
+            //如果是第一页
+            if (num == 1) {
+                $(".pagination").append('<li class="disabled">\n' +
+                    '<a href="javascript:void(0)" aria-label="Previous">\n' +
+                    '<span aria-hidden="true">&laquo;</span>\n' +
+                    '</a>\n' +
+                    '</li>')
+            } else {
+                $(".pagination").append('<li>\n' +
+                    '<a href="javascript:void(0)" onclick="Fuzzy_queryUser(' + (num - 1) + ')" aria-label="Previous">\n' +
+                    '<span aria-hidden="true">&laquo;</span>\n' +
+                    '</a>\n' +
+                    '</li>')
+            }
+            //页数
+            for (var i = 1; i <= pages; i++) {
+                $(".pagination").append('<li><a href="javascript:void(0)" onclick="Fuzzy_queryUser(' + i + ')">' + i + '</a></li>');
+            }
+            //如果是最后一页
+            if (num == pages) {
+                $(".pagination").append('<li class="disabled">\n' +
+                    '<a href="javascript:void(0)" aria-label="Next">\n' +
+                    '<span aria-hidden="true">&raquo;</span>\n' +
+                    '</a>\n' +
+                    '</li>');
+            } else {
+                $(".pagination").append('<li>\n' +
+                    '<a href="javascript:void(0)" onclick="Fuzzy_queryUser(' + (num + 1) + ')" aria-label="Next">\n' +
+                    '<span aria-hidden="true">&raquo;</span>\n' +
+                    '</a>\n' +
+                    '</li>');
+            }
+            //将当前页标注为active
+            $(".pagination li").eq(num).addClass("active");
+        });
+    }
+    //跳转页数
+    function GoPage() {
+        let data = $('#GoPageForm').serializeArray();
+        var num = getObjectValues(data[0]);
+        Fuzzy_queryUser(num[1]);
+    }
+    //获取键值对的值
+    function getObjectValues(object) {
+        var values = [];
+        for (var property in object)
+            values.push(object[property]);
+        return values;
+    }
+</script>
+
+<!--定义一个修改管理员的模态框-->
+<!-- Modal -->
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">用户信息修改</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form id="updateFrom">
+                <div class="modal-body">
+                    <div class="form-group wd-xs-300">
+                        <label>编号：</label>
+                        <input type="text" id="update_u_id" name="userid" v-model="student.s_id" class="form-control"
+                               placeholder="请输入用户编号" required>
+                    </div>
+                    <!-- form-group -->
+                    <div class="form-group wd-xs-300">
+                        <label>昵称：</label>
+                        <input type="text" id="update_u_nickname" name="usernickname" v-model="student.s_name"
+                               class="form-control"
+                               placeholder="请输入用户昵称" required>
+                    </div>
+                    <!-- form-group -->
+                    <div class="form-group wd-xs-300">
+                        <label>密码：</label>
+                        <input type="text" id="update_u_password" name="userpassword" v-model="student.s_password"
+                               class="form-control"
+                               placeholder="请输入用户密码" required>
+                    </div>
+                    <!-- form-group -->
+                    <div class="form-group wd-xs-300">
+                        <label>姓名：</label>
+                        <input type="text" id="update_u_name" name="username" v-model="student.s_password"
+                               class="form-control"
+                               placeholder="请输入用户姓名" required>
+                    </div>
+                    <!-- form-group -->
+                    <div class="form-group wd-xs-300">
+                        <label for="update_u_sex">性别</label>
+                        <select name=usersex class="form-control" id="update_u_sex">
+                            <option value="男">男</option>
+                            <option value="女">女</option>
+                        </select>
+                    </div>
+                    <!-- form-group -->
+                    <div class="form-group wd-xs-300">
+                        <label>电话号码：</label>
+                        <input type="text" id="update_u_phone" name="userphone" v-model="student.s_password"
+                               class="form-control"
+                               placeholder="请输入用户电话号码" required>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close
+                    </button>
+                    <button onclick="updateUser()" type="button" class="btn btn-primary">Save changes
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- begin::global scripts -->
+<script src="assets/vendors/bundle.js"></script>
+<!-- end::global scripts -->
+
+<!-- begin::custom scripts -->
+<script src="assets/js/custom.js"></script>
+<script src="assets/js/app.js"></script>
+<!-- end::custom scripts -->
+
+</body>
+</html>

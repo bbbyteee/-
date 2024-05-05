@@ -1,0 +1,126 @@
+﻿<!--该网页用于实现--注册--界面-->
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon">
+    <title>食品溯源系统注册~</title>
+
+    <!--    引入jq-->
+    <script src="assets/js/jquery.js"></script>
+    <!-- begin::global styles -->
+    <link rel="stylesheet" href="assets/vendors/bundle.css" type="text/css">
+    <!-- end::global styles -->
+
+    <!-- begin::custom styles -->
+    <link rel="stylesheet" href="assets/css/app.css" type="text/css">
+    <!-- end::custom styles -->
+
+</head>
+<body class="bg-white h-100-vh p-t-0">
+
+<!-- begin::page loader-->
+<div class="page-loader">
+    <div class="spinner-border"></div>
+    <span>Loading ...</span>
+</div>
+<!-- end::page loader -->
+
+<div class="p-b-50 d-block d-lg-none"></div>
+
+<div class="container h-100-vh">
+    <div class="row align-items-md-center h-100-vh">
+        <div class="col-lg-6 d-none d-lg-block">
+            <img class="img-fluid" src="assets/media/svg/register.svg" alt="...">
+        </div>
+        <div class="col-lg-4 offset-lg-1">
+            <h3>用户注册</h3>
+            <p>Create a new account</p>
+            <form id="registerFrom">
+                <!-- 昵称-->
+                <div class="form-group mb-4">
+                    <input type="text" name="u_nickname" class="form-control form-control-lg" autofocus placeholder="昵称">
+                </div>
+                <!-- id-->
+                <div class="form-group mb-4">
+                    <input type="text" name="u_id" class="form-control form-control-lg" placeholder="用户Id">
+                </div>
+                <!-- 密码和确认密码-->
+                <div class="form-group mb-4">
+                    <input type="password" name="u_password" class="form-control form-control-lg" placeholder="密码">
+                </div>
+                <div class="form-group mb-4">
+                    <input type="password" name="u_password1" class="form-control form-control-lg" placeholder="确认密码">
+                </div>
+                <!-- 姓名-->
+                <div class="form-group mb-4">
+                    <input type="text" name="u_name" class="form-control form-control-lg" autofocus placeholder="姓名">
+                </div>
+                <!-- 电话-->
+                <div class="form-group mb-4">
+                    <input type="text" name="u_phone" class="form-control form-control-lg" autofocus placeholder="电话号码">
+                </div>
+                <!-- 用户性别-->
+                <div class="form-group">
+                    <label for="sexSelect">性别</label>
+                    <select name = sex class="form-control" id="sexSelect">
+                        <option value="男">男</option>
+                        <option value="女">女</option>
+                    </select>
+                </div>
+                <!-- 用户类别-->
+                <div class="form-group">
+                    <label for="positionSelect">身份</label>
+                    <select name= position class="form-control" id="positionSelect">
+                        <option value="1">生产商</option>
+                        <option value="2">运输商</option>
+                        <option value="3">销售商</option>
+                        <option value="4">消费者</option>
+                    </select>
+                </div>
+                <button id="register" type="button" onclick="userRegister()" class="btn btn-primary btn-lg btn-block btn-uppercase mb-4">创建用户</button>
+                <p class="text-right">
+                    <a href="login.html" class="text-underline">已有账户?</a>
+                </p>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<!--编写注册的异步请求js代码-->
+<script>
+    function userRegister() {
+        //1、获取表单中的数据
+        var data = $('#registerFrom').serializeArray();
+        //2、提交注册请求  第一个参数为url，第二个参数提交的数据，第三参数为成功之后的回调函数
+        $.post('/WebDemo/userRegister',data,function (result){
+            //注册成功
+            if(result.ok==true){
+                alert(result.username+"注册成功！！！请登录~");
+                //跳转index.html页面
+                location.href = "login.html";
+            }else{
+                alert(result.message);
+            }
+        });
+    }
+
+    $(document).keydown(function(event){
+        if(event.keyCode==13){
+            document.getElementById("register").click();
+        }
+    });
+</script>
+<!-- begin::global scripts -->
+<script src="assets/vendors/bundle.js"></script>
+<!-- end::global scripts -->
+
+<!-- begin::custom scripts -->
+<script src="assets/js/app.js"></script>
+<!-- end::custom scripts -->
+
+</body>
+</html>
